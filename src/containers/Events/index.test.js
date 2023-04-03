@@ -32,7 +32,10 @@ const data = {
         "Présentation des outils analytics aux professionnels du secteur",
       nb_guesses: 1300,
       periode: "24-25-26 Février",
-      prestations: ["1 espace d’exposition", "1 scéne principale"],
+      prestations: [
+        "1 espace d’exposition", 
+        "1 scéne principale"
+      ],
     },
   ],
 };
@@ -58,6 +61,7 @@ describe("When Events is created", () => {
       expect(await screen.findByText("An error occured")).toBeInTheDocument();
     });
   });
+
   describe("and we select a category", () => {
     it.only("an filtered list is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
