@@ -35,6 +35,7 @@
     padding: 0;
     padding-left: 16px;
     li {
+      cursor: pointer;
       display: flex;
       align-items: center;
       list-style: none;
@@ -44,12 +45,14 @@
     }
   }
   input {
+    cursor: pointer;
     width: 16px;
     height: 16px;
     min-width: 16px;
     margin-right: 16px;
   }
   button {
+    cursor: pointer;
     border: none;
     background: none;
     height: 32px;

@@ -25,7 +25,13 @@ const Select = ({
       {label && <div className="label">{label}</div>}
       <div className="Select">
         <ul>
-          <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
+          <li 
+            className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}
+            onClick={(e) => {
+              e.preventDefault();
+              setCollapsed(!collapsed);
+            }}
+          >
             {value || (!titleEmpty && "Toutes")}
           </li>
           {!collapsed && (
