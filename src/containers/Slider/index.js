@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, React } from "react";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
 
@@ -7,9 +7,15 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus.sort((evtB, evtA) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 0
-  );
+  const [byDateDesc, setByDateDesc] = useState([])
+  useEffect(() => {
+    if(data){
+      const tmpByDateDesc = data.focus.sort((evtB, evtA) =>
+        new Date(evtA.date) < new Date(evtB.date) ? -1 : 0
+      );
+      setByDateDesc(tmpByDateDesc)
+    }
+  }, [data])
   const nextCard = () => {
     setTimeout(
       () => setIndex(index + 1 < byDateDesc.length ? index + 1 : 0),
@@ -22,7 +28,7 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        <div key={event.title}>
           <div
             key={event.title}
             className={`SlideCard SlideCard--${
@@ -38,7 +44,10 @@ const Slider = () => {
               </div>
             </div>
           </div>
-          <div className="SlideCard__paginationContainer">
+          <div
+            className="SlideCard__paginationContainer"
+            key={event.description}
+          >
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
@@ -51,7 +60,7 @@ const Slider = () => {
               ))}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
